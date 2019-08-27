@@ -9,7 +9,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Which album would you like to see?</Text>
+        <Text>Wich album would you like to see?</Text>
         <Button
           title="Album 1"
           onPress={() => {
