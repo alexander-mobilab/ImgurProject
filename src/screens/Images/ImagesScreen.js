@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   Image,
-  TouchableHighlight,
   FlatList
 } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addImage } from '../../redux/store/addImage';
 
 
-export default class ImagesScreen extends Component {
+class ImagesScreen extends Component {
   
   
   render() {
@@ -23,7 +24,6 @@ export default class ImagesScreen extends Component {
 
     const getImage = async() => {
       let bildURL = '';
-      {/*const res = new Promise()*/}
       try {
         const response = await fetch('https://api.imgur.com/3/image/2awGRrX.json', {
         method: 'GET',  
@@ -36,34 +36,12 @@ export default class ImagesScreen extends Component {
       } catch (error) {
         console.error(error);
       }
+      this.props.addImage(bildURL);
       return bildURL;
     }
 
-    {/*async function bla() {
-      let abc = await getImage();
-      console.log(abc);
-    }
-  bla();*/}
-
-    let bild = getImage();
-    setTimeout(function(){console.log(bild);}, 5000);
-    console.log(bild);
-
-    {/*let promise1 = new Promise(function(resolve, reject) {
-      setTimeout(resolve, 500, 'one');
-    });
-
-
-  Promise.race([getImage(), promise1]).then( function(value){
-    console.log(value);
-  });*/}
-
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-
-        {/*<Image source={imageMapper[itemID][0].img || require('./img/gmail.png')}
-            style={{ height: 100, width: 100 }}
-      />*/}
 
         <FlatList data={imageMapper[itemID]}
           renderItem={({ item }) =>
@@ -72,8 +50,22 @@ export default class ImagesScreen extends Component {
             />}
             keyExtractor={(item, index) => index.toString()}
         />
-        <Image source={{uri: ''}} />
+        <Image source={{uri: `${this.props.imageList}`}} />
       </View>
     );
   }
 }
+
+
+const mapStateToProps = (state) => {
+  const { album } = state;
+  return { album };
+}
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    addImage,
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ImagesScreen);

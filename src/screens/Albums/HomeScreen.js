@@ -4,15 +4,19 @@ import {
   View,
   Text,
 } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { clearImages } from '../../redux/store/clearImages';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Wich album would you like to see?</Text>
         <Button
-          title="Album 1"
+          title={this.props.album.user}
           onPress={() => {
+            this.props.clearImages();
             this.props.navigation.navigate('Images', { itemID: 1 })
           }}
         />
@@ -26,3 +30,16 @@ export default class HomeScreen extends Component {
     );
   }  
 }
+
+const mapStateToProps = (state) => {
+  const { album } = state;
+  return { album };
+}
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    clearImages,
+  }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  View,
-  Text
-} from 'react-native';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
+
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+
+import myReducer from './src/redux/store/reducer';
 
 import HomeScreen from './src/screens/Albums/HomeScreen';
 import ImagesScreen from './src/screens/Images/ImagesScreen';
 
+const store = createStore(myReducer);
 
 const AppNavigator = createStackNavigator({
 
@@ -24,6 +25,10 @@ const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   render() {
-    return <AppContainer />;
+    return (
+      <Provider store={ store }>
+        <AppContainer />
+      </Provider>
+    );
   }
 }
