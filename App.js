@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
 import myReducer from './src/redux/store/reducer';
 
 import HomeScreen from './src/screens/Albums/HomeScreen';
 import ImagesScreen from './src/screens/Images/ImagesScreen';
+import { rootSaga } from './src/redux/sagas/saga';
 
-const store = createStore(myReducer);
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(myReducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
+
 
 const AppNavigator = createStackNavigator({
 

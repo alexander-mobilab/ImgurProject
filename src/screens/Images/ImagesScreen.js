@@ -11,46 +11,27 @@ import { addImage } from '../../redux/store/addImage';
 
 class ImagesScreen extends Component {
   
+  componentDidMount() {
+    const { navigation } = this.props;
+    const itemID = navigation.getParam('itemID');
+    return this.props.addImage(itemID);
+  }
   
   render() {
     const { navigation } = this.props;
     const itemID = navigation.getParam('itemID');
 
-    const imageMapper = {
-      '1': [{ img: require('./img/github.png') },
-      { img: require('./img/slack.png') }],
-      '2': [{ img: require('./img/mobilab_signature.gif') }]
-    }
-
-    const getImage = async() => {
-      let bildURL = '';
-      try {
-        const response = await fetch('https://api.imgur.com/3/image/2awGRrX.json', {
-        method: 'GET',  
-        headers: {
-          'Authorization': 'Client-ID 77248e7a549713b'},
-        });
-        const imageJson = await response.json();
-
-        bildURL = imageJson.data.link;
-      } catch (error) {
-        console.error(error);
-      }
-      this.props.addImage(bildURL);
-      return bildURL;
-    }
-
+    const imageMapper = this.props.album.imageList;
+    
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-
-        <FlatList data={imageMapper[itemID]}
+        <FlatList data={imageMapper}
           renderItem={({ item }) =>
-            <Image source={item.img}
+            <Image source={item}
               style={{ height: 100, width: 100 }}
             />}
             keyExtractor={(item, index) => index.toString()}
         />
-        <Image source={{uri: `${this.props.imageList}`}} />
       </View>
     );
   }

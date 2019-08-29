@@ -1,27 +1,31 @@
-import React from 'react';
-
 import { combineReducers } from 'redux';
 
 
 const initialState = {
   user: 'alexmobi',
   albumList: [],
-  imageList: ''
+  imageList: []
 }
 
 const myReducer = (state = initialState, action) => {
   const newState = {...state};
 
-  if(action.type === 'ADD_ALBUM'){
-    newState.albumList = state.albumList.concat(album);
+  if(action.type === 'ADD_ALBUMS_ASYNC'){
+    newState.albumList = action.albums;
   }
-  if(action.type === 'ADD_IMAGE'){
-    newState.imageList = action.imag;
-    console.log('test'+action.imag);
+  if(action.tyoe === 'CLEAR_ALBUMS'){
+    newState.albumList = [];
+  }
+
+  if(action.type === 'ADD_IMAGE_ASYNC'){
+    for(i=0; i<=action.img.length; i++){
+      console.log(i);
+      newState.imageList[i] = {uri: action.img[i]};
+    }
+    console.log(newState.imageList);
   }
   if(action.type === 'CLEAR_IMAGES'){
     newState.imageList = [];
-    console.log('klappt');
   }
   return newState;
 }

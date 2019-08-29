@@ -1,6 +1,6 @@
-export const addImage = string => (
+export const addImage = albumID => (
     {
       type: 'ADD_IMAGE',
-      imag: string,
+      ID: albumID,
     }
   );
