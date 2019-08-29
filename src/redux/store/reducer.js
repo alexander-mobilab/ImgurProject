@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 
 const initialState = {
-  user: 'alexmobi',
+  user: 'StormWingDelta',
   albumList: [],
   imageList: []
 }
@@ -19,10 +19,8 @@ const myReducer = (state = initialState, action) => {
 
   if(action.type === 'ADD_IMAGE_ASYNC'){
     for(i=0; i<=action.img.length; i++){
-      console.log(i);
       newState.imageList[i] = {uri: action.img[i]};
     }
-    console.log(newState.imageList);
   }
   if(action.type === 'CLEAR_IMAGES'){
     newState.imageList = [];

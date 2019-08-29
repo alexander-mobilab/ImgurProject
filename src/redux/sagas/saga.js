@@ -1,5 +1,5 @@
-//import delay from 'redux-saga';
-import { takeLatest, put, delay, all } from 'redux-saga/effects';
+import { takeLatest, put, all } from 'redux-saga/effects';
+
 
 
 function* fetchAlbumsID() {
@@ -18,7 +18,6 @@ function* fetchAlbumsID() {
       } catch (error) {
         console.error(error);
       }
-      console.log(albums);
       return albums;
 }
 
