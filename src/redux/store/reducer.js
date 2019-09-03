@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 
 const initialState = {
-  user: 'StormWingDelta',
+  user: 'alexmobi',
   albumList: [],
   imageList: []
 }
@@ -13,7 +13,7 @@ const myReducer = (state = initialState, action) => {
   if(action.type === 'ADD_ALBUMS_ASYNC'){
     newState.albumList = action.albums;
   }
-  if(action.tyoe === 'CLEAR_ALBUMS'){
+  if(action.type === 'CLEAR_ALBUMS'){
     newState.albumList = [];
   }
 

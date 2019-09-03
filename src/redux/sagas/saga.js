@@ -32,10 +32,10 @@ function* watchAddAlbum(){
 
 
 
-function* fetchImages(ID) {
+function* fetchImages(albumID) {
     let albumImages = [];
       try {
-        const response = yield fetch('https://api.imgur.com/3/album/'+ID, {
+        const response = yield fetch('https://api.imgur.com/3/album/'+albumID, {
         method: 'GET',  
         headers: {
           'Authorization': 'Client-ID 77248e7a549713b'},
@@ -51,7 +51,7 @@ function* fetchImages(ID) {
 }
 
 function* addImagesAsync(action) {
-    const img = yield fetchImages(action.ID);
+    const img = yield fetchImages(action.albumID);
     yield put({type: 'ADD_IMAGE_ASYNC', img});
 }
 

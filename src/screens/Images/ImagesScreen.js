@@ -13,13 +13,13 @@ class ImagesScreen extends Component {
   
   componentDidMount() {
     const { navigation } = this.props;
-    const itemID = navigation.getParam('itemID');
-    return this.props.addImage(itemID);
+    const albumID = navigation.getParam('albumID');
+    return this.props.addImage(albumID);
   }
   
   render() {
     const { navigation } = this.props;
-    const itemID = navigation.getParam('itemID');
+    const itemID = navigation.getParam('albumID');
 
     const imageMapper = this.props.album.imageList;
     

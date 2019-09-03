@@ -24,7 +24,7 @@ class HomeScreen extends Component {
             <Button title={item.title}
             onPress={() => {
               this.props.clearImages();
-              this.props.navigation.navigate('Images', { itemID: item.ID });
+              this.props.navigation.navigate('Images', { albumID: item.ID });
             }}
             />}
             keyExtractor={(item, index) => index.toString()}
