@@ -11,9 +11,10 @@ function* fetchAlbumsID() {
           'Authorization': 'Client-ID 77248e7a549713b'},
         });
         const imageJson = yield response.json();
-        for(i=0; i<imageJson.data.length; i++){
-            albums[i] = {ID: imageJson.data[i].id, title: imageJson.data[i].title};
-        }
+
+        imageJson.data.forEach( (item, index) => {
+          albums[index] = {id: item.id, title: item.title};
+        });
 
       } catch (error) {
         console.error(error);
@@ -32,18 +33,20 @@ function* watchAddAlbum(){
 
 
 
-function* fetchImages(albumID) {
+function* fetchImages(albumId) {
     let albumImages = [];
       try {
-        const response = yield fetch('https://api.imgur.com/3/album/'+albumID, {
+        const response = yield fetch('https://api.imgur.com/3/album/'+albumId, {
         method: 'GET',  
         headers: {
           'Authorization': 'Client-ID 77248e7a549713b'},
         });
         const imageJson = yield response.json();
-        for(i=0; i<imageJson.data.images.length; i++) {
-            albumImages[i] = imageJson.data.images[i].link;
-        }
+
+        imageJson.data.images.forEach( (item, index) => {
+          albumImages[index] = item.link;
+        });
+
       } catch (error) {
         console.error(error);
       }
@@ -51,7 +54,7 @@ function* fetchImages(albumID) {
 }
 
 function* addImagesAsync(action) {
-    const img = yield fetchImages(action.albumID);
+    const img = yield fetchImages(action.albumId);
     yield put({type: 'ADD_IMAGE_ASYNC', img});
 }
 

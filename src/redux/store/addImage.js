@@ -1,6 +1,6 @@
-export const addImage = albumID => (
+export const addImage = albumId => (
     {
       type: 'ADD_IMAGE',
-      albumID,
+      albumId,
     }
   );
