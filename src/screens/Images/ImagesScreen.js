@@ -20,9 +20,7 @@ class ImagesScreen extends Component {
   }
 
   render() {
-
     const imageMapper = this.props.album.imageList;
-
     return (
       <View style={styles.container}>
         <ShowList album={imageMapper} />
@@ -38,11 +36,11 @@ function ShowList(props) {
   else {
     return <FlatList data={props.album}
       renderItem={({ item }) =>
-        <Image source={item}
+        <Image source={{uri: item.link}}
           style={{ height: 100, width: 100 }}
         />}
       keyExtractor={(item, index) => index.toString()} // item solves 'same key' issue. why?
-    />
+    />;
   }
 }
 
