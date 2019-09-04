@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import { Provider } from 'react-redux';
@@ -9,7 +9,8 @@ import myReducer from './src/redux/store/reducer';
 
 import HomeScreen from './src/screens/Albums/HomeScreen';
 import ImagesScreen from './src/screens/Images/ImagesScreen';
-import { rootSaga } from './src/redux/sagas/saga';
+//import  rootSaga  from './index';
+import { rootSaga } from './src/redux/sagas/index';
 
 
 const sagaMiddleware = createSagaMiddleware();
