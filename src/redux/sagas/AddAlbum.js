@@ -10,7 +10,6 @@ function* fetchAlbumsID() {
           'Authorization': 'Client-ID 77248e7a549713b'},
         });
         const imageJson = yield response.json();
-        console.log(imageJson);
 
         imageJson.data.forEach( (item, index) => {
           albums[index] = {id: item.id, title: item.title};

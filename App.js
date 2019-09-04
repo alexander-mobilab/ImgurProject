@@ -7,8 +7,9 @@ import createSagaMiddleware from 'redux-saga';
 
 import myReducer from './src/redux/store/reducer';
 
-import HomeScreen from './src/screens/Albums/HomeScreen';
+import AlbumsScreen from './src/screens/Albums/AlbumsScreen';
 import ImagesScreen from './src/screens/Images/ImagesScreen';
+import UserScreen from './src/screens/User/UserScreen';
 //import  rootSaga  from './index';
 import { rootSaga } from './src/redux/sagas/index';
 
@@ -20,11 +21,12 @@ sagaMiddleware.run(rootSaga);
 
 const AppNavigator = createStackNavigator({
 
-  Home: HomeScreen,
+  User: UserScreen,
+  Albums: AlbumsScreen,
   Images: ImagesScreen,
 
 }, {
-    initialRouteName: 'Home',
+    initialRouteName: 'User',
 });
 
 
